@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "dart",
+      "request": "launch",
+      "name": "penalties(D)"
+    },
+    {
+      "type": "dart",
+      "request": "launch",
+      "name": "penalties(P)",
+      "showMemoryUsage": true,
+      "flutterMode": "profile"
+    },
+    {
+      "type": "dart",
+      "request": "launch",
+      "name": "penalties(R)",
+      "showMemoryUsage": true,
+      "flutterMode": "release"
+    }
+  ]
+}
