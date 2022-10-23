@@ -1,9 +1,11 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../utils/helpers/routing/routing.dart';
 import '../../penalty/view/penalty.view.dart';
 import '../../users/view/users.view.dart';
+import '../provider/penalties.provider.dart';
 import 'add.penalty.trx.popup.dart';
 import 'penaltiestrx.list.view.dart';
 
@@ -35,13 +37,21 @@ class HomeView extends StatelessWidget {
         ),
         child: const Icon(Icons.add_rounded),
       ),
-      body: const CustomScrollView(
-        slivers: [
-          SliverPadding(
-            padding: EdgeInsets.fromLTRB(8, 10, 8, 20),
-            sliver: PenaltyTrxListView(),
-          ),
-        ],
+      body: Consumer(
+        builder: (_, ref, __) {
+          return RefreshIndicator(
+            onRefresh: () async => ref.refresh(penaltyTrxsProvider),
+            child: const CustomScrollView(
+              physics: BouncingScrollPhysics(),
+              slivers: [
+                SliverPadding(
+                  padding: EdgeInsets.fromLTRB(8, 10, 8, 20),
+                  sliver: PenaltyTrxListView(),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

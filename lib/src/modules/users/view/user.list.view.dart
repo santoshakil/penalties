@@ -13,6 +13,7 @@ class UserListView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final users = ref.watch(usersProvider).value ?? [];
     return CustomScrollView(
+      physics: const BouncingScrollPhysics(),
       slivers: [
         SliverList(
           delegate: SliverChildBuilderDelegate(
