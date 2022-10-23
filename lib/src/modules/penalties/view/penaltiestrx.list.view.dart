@@ -33,17 +33,33 @@ class PenaltyTrxTile extends StatelessWidget {
       duration: const Duration(milliseconds: 500),
       builder: (_, double opacity, __) => Opacity(
         opacity: opacity,
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: ListTile(
-            title: Text(trx.penaltyName!),
-            subtitle: Text(trx.userName!),
-            trailing: Text(trx.date.formatted),
-            onLongPress: () async => await showModal(
-              builder: (_) => AddPenaltyTrxPopup(trx: trx),
-              context: context,
+        child: Stack(
+          alignment: Alignment.topRight,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: ListTile(
+                title: Text(trx.penaltyName!),
+                subtitle: Text(trx.userName!),
+                trailing: Text(trx.date.formatted),
+                onLongPress: () async => await showModal(
+                  builder: (_) => AddPenaltyTrxPopup(trx: trx),
+                  context: context,
+                ),
+              ),
             ),
-          ),
+            trx.paid
+                ? const Icon(
+                    Icons.check_circle,
+                    color: Colors.green,
+                    size: 14.0,
+                  )
+                : const Icon(
+                    Icons.circle_rounded,
+                    color: Colors.red,
+                    size: 14.0,
+                  ),
+          ],
         ),
       ),
     );

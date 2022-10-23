@@ -50,10 +50,10 @@ class AddPenaltyTrxPopup extends ConsumerWidget {
             title: Text(notifier.value.date.formatted),
             onTap: () async {
               final date = await showDatePicker(
-                context: context,
+                firstDate: DateTime.now().subtract100Years,
+                lastDate: DateTime.now().add100Years,
                 initialDate: notifier.value.date,
-                firstDate: DateTime(2000),
-                lastDate: DateTime(2100),
+                context: context,
               );
               if (date == null) return;
               final time = await showTimePicker(
@@ -63,6 +63,12 @@ class AddPenaltyTrxPopup extends ConsumerWidget {
               if (time == null) return;
               notifier.changeDate(date.withTime(time));
             },
+          ),
+          const SizedBox(height: 8),
+          SwitchListTile(
+            title: const Text('Paid'),
+            value: notifier.value.paid,
+            onChanged: notifier.changeIsPaid,
           ),
         ],
       ),

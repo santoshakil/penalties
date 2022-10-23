@@ -21,6 +21,8 @@ final userTotalPenaltyProvider = FutureProvider.family((ref, User? user) {
   return db.penaltyTrxs
       .where()
       .userIdEqualTo(user?.id ?? -1)
+      .filter()
+      .paidEqualTo(false)
       .amountProperty()
       .sum();
 });

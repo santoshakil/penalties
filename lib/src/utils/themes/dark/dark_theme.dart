@@ -52,7 +52,7 @@ const _floatingActionButtonTheme = FloatingActionButtonThemeData(
 const _iconTheme = IconThemeData(color: iconColorDark);
 
 const _listTileTheme = ListTileThemeData(
-  shape: roundedRectangleBorder30,
+  shape: roundedRectangleBorder15,
   tileColor: cardColorDark,
 );
 

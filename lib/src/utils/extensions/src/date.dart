@@ -79,6 +79,10 @@ extension DateUtils on DateTime {
 
   DateTime get previousDay => addDays(-1);
 
+  DateTime get add100Years => addDays(36500);
+
+  DateTime get subtract100Years => addDays(-36500);
+
   bool isSameDay(DateTime b) =>
       year == b.year && month == b.month && day == b.day;
 

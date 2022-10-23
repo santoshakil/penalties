@@ -19,7 +19,7 @@ final penaltyTrxsProvider = FutureProvider((ref) async {
   ref.watch(penaltiesStreamProvider);
   final user = ref.watch(penaltyUserFilterProvider);
   final name = ref.watch(penaltyNameFilterProvider);
-  final paid = ref.watch(penaltyPaidFilterProvider);
+  // final paid = ref.watch(penaltyPaidFilterProvider);
   final endDate = ref.watch(penaltyEndDateFilterProvider);
   final startDate = ref.watch(penaltyStartDateFilterProvider);
   return db.penaltyTrxs
@@ -30,7 +30,7 @@ final penaltyTrxsProvider = FutureProvider((ref) async {
       .optional(user != null, (q) => q.user((u) => u.idEqualTo(user!.id)))
       .userNameContains(name, caseSensitive: false)
       .dateLessThan(endDate)
-      .paidEqualTo(paid)
+      // .paidEqualTo(paid)
       .findAll();
 });
 
@@ -39,7 +39,7 @@ final addPenaltyTrxFormKeyProvider =
 
 final addPenaltyTrxProvider = StateNotifierProvider.autoDispose
     .family<AddPenaltyTrxProvider, PenaltyTrx, PenaltyTrx?>(
-        (_, PenaltyTrx? penaltyTrx) => AddPenaltyTrxProvider(penaltyTrx));
+        (_, PenaltyTrx? trx) => AddPenaltyTrxProvider(trx));
 
 class AddPenaltyTrxProvider extends StateNotifier<PenaltyTrx> {
   AddPenaltyTrxProvider(this.penaltyTrx) : super(penaltyTrx ?? PenaltyTrx());
@@ -58,6 +58,8 @@ class AddPenaltyTrxProvider extends StateNotifier<PenaltyTrx> {
   Future<void> delete() async => await state.delete();
 
   void changeUser(User user) => state = state.copyWith(user: user);
+
+  void changeIsPaid(bool isPaid) => state = state.copyWith(paid: isPaid);
 
   void changePenalty(Penalty penalty) =>
       state = state.copyWith(penalty: penalty);
